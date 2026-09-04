@@ -1,0 +1,84 @@
+```yaml
+name: RaceDay Part 1 CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  validate-part1:
+    name: Validate Part 1 Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check docs folder
+        run: |
+          if [ ! -d "docs" ]; then
+            echo "ERROR: docs folder does not exist."
+            exit 1
+          fi
+
+          echo "docs folder found."
+
+      - name: Check ERD
+        run: |
+          if [ ! -f "docs/RaceDay_ERD.png" ] && [ ! -f "docs/RaceDay_ERD.pdf" ]; then
+            echo "ERROR: ERD file not found."
+            exit 1
+          fi
+
+          echo "ERD file found."
+
+      - name: Check API endpoint plan
+        run: |
+          if [ ! -f "docs/RaceDay_API_Endpoint_Plan.md" ] && [ ! -f "docs/RaceDay_API_Endpoint_Plan.pdf" ]; then
+            echo "ERROR: API endpoint plan not found."
+            exit 1
+          fi
+
+          echo "API endpoint plan found."
+
+      - name: Check SQL database script
+        run: |
+          if [ ! -f "docs/RaceDay_Database.sql" ]; then
+            echo "ERROR: SQL database script not found."
+            exit 1
+          fi
+
+          echo "SQL database script found."
+
+      - name: Validate SQL script content
+        run: |
+          grep -qi "CREATE TABLE Users" docs/RaceDay_Database.sql
+          grep -qi "CREATE TABLE Organisers" docs/RaceDay_Database.sql
+          grep -qi "CREATE TABLE Events" docs/RaceDay_Database.sql
+          grep -qi "CREATE TABLE Categories" docs/RaceDay_Database.sql
+          grep -qi "CREATE TABLE Enrolments" docs/RaceDay_Database.sql
+          grep -qi "CREATE TABLE Results" docs/RaceDay_Database.sql
+
+          echo "All required database entities found."
+
+      - name: Validate README
+        run: |
+          if [ ! -f "README.md" ]; then
+            echo "ERROR: README.md does not exist."
+            exit 1
+          fi
+
+          echo "README.md found."
+
+      - name: Part 1 validation successful
+        run: |
+          echo "=========================================="
+          echo "RaceDay Part 1 validation successful!"
+          echo "=========================================="
+```
