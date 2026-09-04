@@ -31,7 +31,7 @@ jobs:
 
       - name: Check ERD
         run: |
-          if [ ! -f "docs/docs/RaceDay_ERD.png.jpeg" ] && [ ! -f "docs/docs/RaceDay_ERD.png.jpeg" ]; then
+          if [ ! -f "docs/RaceDay_ERD.png.jpeg" ] && [ ! -f "docs/RaceDay_ERD.png.jpeg" ]; then
             echo "ERROR: ERD file not found."
             exit 1
           fi
@@ -81,4 +81,5 @@ jobs:
           echo "=========================================="
           echo "RaceDay Part 1 validation successful!"
           echo "=========================================="
+
 
