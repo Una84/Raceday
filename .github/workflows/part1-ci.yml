@@ -1,4 +1,4 @@
-```yaml
+
 name: RaceDay Part 1 CI
 
 on:
@@ -81,4 +81,4 @@ jobs:
           echo "=========================================="
           echo "RaceDay Part 1 validation successful!"
           echo "=========================================="
-```
+
