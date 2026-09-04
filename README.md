@@ -89,7 +89,7 @@ The database relationships allow:
 
 The Entity Relationship Diagram shows the structure of the RaceDay database and the relationships between the entities.
 
-![RaceDay ERD](Raceday/docs/RaceDay_ERD.png.jpeg)
+![RaceDay ERD](docs/RaceDay_ERD.png)
 
 ---
 
