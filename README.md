@@ -175,7 +175,8 @@ The workflow checks that:
 
 The successful GitHub Actions build is shown below.
 
-![Successful CI/CD Build](docs/ci-green-build.png)
+![Successful CI/CD Build](docs/ci-green-build.png.png
+)
 
 ---
 
