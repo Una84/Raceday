@@ -31,7 +31,7 @@ jobs:
 
       - name: Check ERD
         run: |
-          if [ ! -f "docs/RaceDay_ERD.png" ] && [ ! -f "docs/RaceDay_ERD.pdf" ]; then
+          if [ ! -f "docs/docs/RaceDay_ERD.png.jpeg" ] && [ ! -f "docs/docs/RaceDay_ERD.png.jpeg" ]; then
             echo "ERROR: ERD file not found."
             exit 1
           fi
