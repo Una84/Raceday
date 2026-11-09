@@ -1,0 +1,58 @@
+@model RaceDay.Web.Models.EventViewModel
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0 fw-bold">Create New Event</h4>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="CreateEvent" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label asp-for="EventName" class="form-label fw-bold"></label>
+                        <input asp-for="EventName" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="EventDescription" class="form-label fw-bold"></label>
+                        <textarea asp-for="EventDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="EventDate" class="form-label fw-bold"></label>
+                            <input asp-for="EventDate" type="date" class="form-control" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="EventType" class="form-label fw-bold"></label>
+                            <select asp-for="EventType" class="form-select">
+                                <option value="Run">Run</option>
+                                <option value="Walk">Walk</option>
+                                <option value="Cycle">Cycle</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="Location" class="form-label fw-bold"></label>
+                            <input asp-for="Location" class="form-control" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="RouteDistance" class="form-label fw-bold">Distance (km)</label>
+                            <input asp-for="RouteDistance" type="number" step="0.01" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PosterImage" class="form-label fw-bold">Event Banner Image (Azure Upload)</label>
+                        <input asp-for="PosterImage" type="file" class="form-control" accept="image/*" />
+                    </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a asp-action="Dashboard" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-warning fw-bold">Publish Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
