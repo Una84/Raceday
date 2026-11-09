@@ -1,0 +1,32 @@
+@model IEnumerable<RaceDay.Web.Models.ResultViewModel>
+@{
+    ViewData["Title"] = "My Results";
+}
+
+<h2 class="mb-4">🥇 My Race History & Results</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Event</th>
+                <th>Category</th>
+                <th>Finish Time</th>
+                <th>Position</th>
+                <th>Pace</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var res in Model)
+            {
+                <tr>
+                    <td class="fw-bold">@res.EventName</td>
+                    <td>@res.CategoryName</td>
+                    <td><span class="badge bg-dark fs-6">@res.FinishTime</span></td>
+                    <td><span class="badge bg-success fs-6"># @res.Position</span></td>
+                    <td>@(res.Pace.HasValue ? $"{res.Pace} min/km" : "N/A")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
