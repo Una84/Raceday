@@ -93,6 +93,20 @@ The Entity Relationship Diagram shows the structure of the RaceDay database and 
 
 ---
 
+# Part 2 – RESTful API Development and Testing
+
+Part 2 implements the backend RESTful Web API using **ASP.NET Core Web API (C#)** and **Entity Framework Core (Code-First Approach)** connected to a SQL Server database, following the endpoint plan produced in Part 1.
+
+## Part 2 Learning Outcomes & Requirements
+- Built a RESTful Web API using ASP.NET Core Web API in C# with Entity Framework Core Code-First approach matching the Part 1 ERD and SQL schema.
+- Implemented user registration, login, and session-based authentication supporting Organiser and Participant roles with password hashing.
+- Fully implemented all planned endpoints for Authentication, User Profile, Events, Categories, Event Enrolments, and Results.
+- Integrated **Swagger / OpenAPI** for interactive endpoint testing directly through the browser.
+- Developed comprehensive **Unit Tests** covering expected success and failure scenarios for authentication, event management, role rejection, and event enrolments.
+- Configured automated **GitHub Actions CI/CD workflow** to build the solution and run all unit tests on every push.
+
+---
+
 # Project Documentation
 
 The `/docs` folder contains the following project documentation:
@@ -108,11 +122,11 @@ The `/docs` folder contains the following project documentation:
 
 # Database Setup
 
-The RaceDay database was designed for Microsoft SQL Server and can be executed using SQL Server Management Studio (SSMS).
+The RaceDay database was designed for Microsoft SQL Server and can be executed using SQL Server Management Studio (SSMS) or automatically generated via Entity Framework Core Code-First migrations in Part 2.
 
 ## Steps
 
-1. Open **SQL Server Management Studio (SSMS)**.
+1. Open **SQL Server Management Studio (SSMS)** or configure your `appsettings.json` connection string.
 2. Create a new query.
 3. Open `docs/RaceDay_Database.sql`.
 4. Copy the complete SQL script into the query window if necessary.
@@ -137,20 +151,20 @@ The RaceDay database was designed for Microsoft SQL Server and can be executed u
 
 ---
 
-# API Planning
+# API Planning & Implementation
 
-The API Endpoint Plan defines the RESTful API that will be implemented in Part 2.
+The API Endpoint Plan defines the RESTful API that was successfully implemented in Part 2.
 
-The planned API covers:
+The implemented API covers:
 
-- Authentication
-- User profiles
-- Events
-- Categories
-- Event enrolments
-- Results
+- Authentication (Register & Login with password hashing)
+- User profiles (View & Update)
+- Events (Create, Read, Update, Delete/Deactivate)
+- Categories (Create, Read, Update, Delete/Deactivate)
+- Event Enrolments (Participant entry & Organiser management)
+- Results (Capture, View, Update, Delete)
 
-Role-based access will be enforced at API level during Part 2 development.
+Role-based access is strictly enforced at the API level for Organisers and Participants.
 
 The complete endpoint plan can be found in:
 
@@ -158,41 +172,34 @@ The complete endpoint plan can be found in:
 
 ---
 
-# GitHub Actions / CI/CD
+# GitHub Actions / CI/CD & Unit Testing
 
-GitHub Actions is used to automatically validate the Part 1 repository structure.
+GitHub Actions is used to automatically validate the repository structure, build the solution, and execute all unit tests for Part 2.
 
-The workflow checks that:
-
-- The `/docs` folder exists
-- The ERD exists
-- The API endpoint plan exists
-- The SQL database script exists
-- The required database entities are present in the SQL script
-- The README file exists
+The workflows check that:
+- The `/docs` folder, ERD, API endpoint plan, SQL database script, and README file exist.
+- The solution successfully builds using the .NET SDK.
+- All unit tests pass successfully.
 
 ## Successful CI/CD Build
 
-The successful GitHub Actions build is shown below.
+The successful GitHub Actions build screenshot is shown below.
 
-![Successful CI/CD Build](docs/ci-green-build.png.png
-)
+![Successful CI/CD Build](docs/ci-green-build.png.png)
 
 ---
 
 # Video Presentation
 
-An unlisted YouTube video demonstrating Part 1 will be provided below.
+An unlisted YouTube video demonstrating Part 1 and Part 2 is provided below.
 
 The video demonstrates:
-
 - RaceDay system overview
 - ERD and database relationships
-- API endpoint plan
-- SQL database script
-- Running the SQL script in SSMS
-- Verification of the created database
-- Verification of the sample data
+- API endpoint plan and implementation
+- SQL database script and Entity Framework setup
+- Running the API and testing endpoints via Swagger UI
+- Unit tests execution and role-based access verification
 
 ## YouTube Video
 
@@ -205,15 +212,53 @@ https://youtu.be/wKNmxjomE90?si=r-a8bmEUBTud_WTi
 
 ```text
 RaceDay/
-│
 ├── .github/
 │   └── workflows/
-│       └── part1-ci.yml
+│       ├── part1-ci.yml
+│       └── part2-ci.yml
 │
 ├── docs/
-│   ├── RaceDay_ERD.png
 │   ├── RaceDay_API_Endpoint_Plan.md
 │   ├── RaceDay_Database.sql
-│   └── ci-green-build.png
+│   ├── RaceDay_ERD.png.jpeg
+│   └── ci-green-build.png.png
 │
+├── src/
+│   ├── RaceDay.Api/
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.cs
+│   │   │   ├── CategoriesController.cs
+│   │   │   ├── EnrolmentsController.cs
+│   │   │   ├── EventsController.cs
+│   │   │   ├── ResultsController.cs
+│   │   │   └── UsersController.cs
+│   │   ├── Dtos/
+│   │   │   ├── AuthDtos.cs
+│   │   │   ├── EventDtos.cs
+│   │   │   └── ResultDtos.cs
+│   │   ├── appsettings.json
+│   │   ├── appsettings.Development.json
+│   │   ├── Program.cs
+│   │   └── RaceDay.Api.csproj
+│   │
+│   ├── RaceDay.Core/
+│   │   ├── Data/
+│   │   │   └── RaceDayDbContext.cs
+│   │   ├── Entities/
+│   │   │   ├── Category.cs
+│   │   │   ├── Enrolment.cs
+│   │   │   ├── Event.cs
+│   │   │   ├── Organiser.cs
+│   │   │   ├── Result.cs
+│   │   │   └── User.cs
+│   │   └── RaceDay.Core.csproj
+│   │
+│   └── RaceDay.Tests/
+│       ├── Controllers/
+│       │   ├── AuthControllerTests.cs
+│       │   ├── EventsControllerTests.cs
+│       │   └── EnrolmentsControllerTests.cs
+│       └── RaceDay.Tests.csproj
+│
+├── RaceDay.sln
 └── README.md
