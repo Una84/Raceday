@@ -1,0 +1,41 @@
+@model IEnumerable<RaceDay.Web.Models.EventViewModel>
+@{
+    ViewData["Title"] = "Organiser Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📊 Organiser Dashboard</h2>
+    <a asp-action="CreateEvent" class="btn btn-warning fw-bold">+ Create New Event</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Event Name</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Distance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Model)
+            {
+                <tr>
+                    <td class="fw-bold">@ev.EventName</td>
+                    <td><span class="badge bg-secondary">@ev.EventType</span></td>
+                    <td>@ev.EventDate.ToString("yyyy-MM-dd")</td>
+                    <td>@ev.Location</td>
+                    <td>@(ev.RouteDistance.HasValue ? $"{ev.RouteDistance} km" : "N/A")</td>
+                    <td>
+                        <a asp-controller="Events" asp-action="Details" asp-route-id="@ev.EventID" class="btn btn-sm btn-info text-white">View</a>
+                        <a asp-action="EditEvent" asp-route-id="@ev.EventID" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="ManageResults" asp-route-id="@ev.EventID" class="btn btn-sm btn-success">Capture Results</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
