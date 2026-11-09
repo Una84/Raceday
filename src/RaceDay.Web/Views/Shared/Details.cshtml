@@ -1,0 +1,68 @@
+@model RaceDay.Web.Models.EventViewModel
+@{
+    ViewData["Title"] = Model.EventName;
+}
+
+<div class="container my-4">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    
+    <div class="card shadow-sm border-0 mb-4">
+        @if (!string.IsNullOrEmpty(Model.PosterUrl))
+        {
+            <img src="@Model.PosterUrl" class="card-img-top" alt="@Model.EventName" style="max-height: 350px; object-fit: cover;" />
+        }
+        <div class="card-body p-4">
+            <span class="badge bg-primary fs-6 mb-2">@Model.EventType</span>
+            <h1 class="display-6 fw-bold">@Model.EventName</h1>
+            <p class="text-muted">📍 <strong>Location:</strong> @Model.Location | 📅 <strong>Date:</strong> @Model.EventDate.ToString("yyyy-MM-dd") | ⏰ <strong>Start:</strong> @Model.StartTime</p>
+            <hr />
+            <h5>About the Event</h5>
+            <p>@Model.EventDescription</p>
+        </div>
+    </div>
+
+    <h3 class="mb-3">Available Categories</h3>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Age Requirement</th>
+                    <th>Gender</th>
+                    <th>Entry Fee</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cat in Model.Categories)
+                {
+                    <tr>
+                        <td class="fw-bold">@cat.CategoryName</td>
+                        <td>@cat.CategoryDescription</td>
+                        <td>@(cat.MinAge.HasValue ? $"{cat.MinAge}+ yrs" : "Open")</td>
+                        <td>@(cat.Gender ?? "Open")</td>
+                        <td class="text-success fw-bold">R @cat.EntryFee</td>
+                        <td>
+                            @if (Context.Session.GetString("UserRole") == "Participant")
+                            {
+                                <form asp-action="Enrol" method="post" class="d-inline">
+                                    <input type="hidden" name="eventId" value="@Model.EventID" />
+                                    <input type="hidden" name="categoryId" value="@cat.CategoryID" />
+                                    <button type="submit" class="btn btn-success btn-sm">Enrol Now</button>
+                                </form>
+                            }
+                            else if (Context.Session.GetInt32("UserID") == null)
+                            {
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary btn-sm">Login to Enrol</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
