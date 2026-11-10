@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-and-test:
-    name: Build Solution and Run Tests
+    name: Build and Test Solution
     runs-on: ubuntu-latest
 
     steps:
@@ -25,10 +25,10 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore RaceDay.sln
 
-      - name: Build solution (API, Web & Core)
-        run: dotnet build --no-restore --configuration Release
+      - name: Build solution
+        run: dotnet build RaceDay.sln --no-restore --configuration Release
 
       - name: Run unit tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
+        run: dotnet test RaceDay.sln --no-build --configuration Release --verbosity normal
