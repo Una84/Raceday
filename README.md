@@ -7,6 +7,7 @@ RaceDay is a full-stack web-based event management system designed for the South
 The system allows Event Organisers to create and manage sporting events, categories, participant enrolments, and race results. Participants can create accounts, browse upcoming events, enter events, view their enrolments, and track their personal race results.
 
 The project was developed progressively across three parts:
+
 - **Part 1:** System Planning and Database Design
 - **Part 2:** RESTful API Development and Testing
 - **Part 3:** MVC Web Application, Azure Blob Storage, and Docker Containerisation
@@ -16,9 +17,11 @@ The project was developed progressively across three parts:
 ## 👥 User Roles
 
 ### 🏢 Organiser
+
 Organisers are responsible for managing sporting events on the RaceDay platform.
 
 **Organisers can:**
+
 - Log into the RaceDay system
 - View an organiser dashboard
 - Create, edit, and delete or deactivate events
@@ -28,29 +31,37 @@ Organisers are responsible for managing sporting events on the RaceDay platform.
 - Capture, edit, and delete participant results
 
 ### 🏃 Participant
+
 Participants use RaceDay to register and participate in events.
 
 **Participants can:**
+
 - Create an account, log in, and manage their profile
 - Upload a profile picture
-- Browse upcoming events, apply filters, and view event details and available categories2
+- Browse upcoming events
+- Apply filters and view event details and available categories
 - Enrol in events and select a category
 - View their enrolments and enrolment statuses
 - View their personal race results and complete race history
 
 ---
 
-## 📚 Part 1 – System Planning and Database
+# 📚 Part 1 – System Planning and Database
 
 Part 1 focused on planning the RaceDay system before API development began.
 
-**The following documents were produced:**
+### Deliverables
+
+The following documents were produced:
+
 1. Entity Relationship Diagram (ERD)
 2. API Endpoint Plan
 3. SQL Server Database Script
 
 ### Database Entities
+
 The RaceDay database contains the following main entities:
+
 1. `Users`
 2. `Organisers`
 3. `Events`
@@ -60,28 +71,38 @@ The RaceDay database contains the following main entities:
 
 ---
 
-## 🔌 Part 2 – RESTful API Development and Testing
+# 🔌 Part 2 – RESTful API Development and Testing
 
-Part 2 implemented the backend RESTful Web API using **ASP.NET Core Web API (C#)** and **Entity Framework Core** with a **SQL Server** database, following the endpoint plan created during Part 1.
+Part 2 implemented the backend RESTful Web API using **ASP.NET Core Web API (C#)** and **Entity Framework Core** with a **SQL Server** database.
+
+The API follows the endpoint plan created during Part 1.
 
 ### Part 2 Features
-- User registration, login, password hashing, and role-based authentication
+
+- User registration and login
+- Password hashing
+- Role-based authentication
 - User profile management
-- Event and category management
-- Participant enrolments and status management
+- Event management
+- Category management
+- Participant enrolments
+- Enrolment status management
 - Race result management
 - Swagger / OpenAPI documentation
-- Unit testing and GitHub Actions CI/CD workflows
+- Unit testing
+- GitHub Actions CI/CD workflows
 
-Role-based access is strictly enforced at the API level for Organisers and Participants.
+Role-based access is enforced at the API level for **Organisers** and **Participants**.
 
 ---
 
-## 🌐 Part 3 – Automation of Web Application
+# 🌐 Part 3 – MVC Web Application
 
-Part 3 brings the RaceDay system together by adding the web-based frontend developed using **ASP.NET Core MVC**. It communicates entirely with the Part 2 RESTful API for all application data operations.
+Part 3 brings the RaceDay system together by adding a web-based frontend developed using **ASP.NET Core MVC**.
 
-### System Architecture
+The MVC application communicates with the Part 2 RESTful API for application data and business operations.
+
+## 🏗️ System Architecture
 
 ```text
                          USER
@@ -106,51 +127,200 @@ Part 3 brings the RaceDay system together by adding the web-based frontend devel
           | SQL Server  |   | Azure Blob        |
           |  Database   |   | Storage           |
           +-------------+   +-------------------+
+```
 
-## System Architecture
+### System Responsibilities
 
-- **MVC Application Responsibilities:** User interface, session management, role-based navigation, presentation of data, and communication with the API.
-- **API Responsibilities:** Business operations, authentication, data access, database operations, file uploads, and Azure Blob Storage integration.
+**MVC Application Responsibilities:**
+
+- User interface
+- Session management
+- Role-based navigation
+- Presentation of data
+- Communication with the API
+- Validation and display of API responses
+
+**API Responsibilities:**
+
+- Business operations
+- Authentication
+- Data access
+- Database operations
+- File uploads
+- Azure Blob Storage integration
 
 ---
 
-## 🚀 Part 3 Features
+# 🚀 Part 3 Features
 
-### 🖥️ MVC Web Application
+## 🖥️ MVC Web Application
+
+The MVC application:
+
 - Consumes the Part 2 RESTful API using controllers and views
-- Provides role-specific navigation, responsive layouts, and authenticated sessions
-- Displays validation messages and handles API errors gracefully
-
-### 🔐 Authentication and Session Management
-Authentication is performed by communicating with the Part 2 API, storing authenticated user information and roles via ASP.NET Core session management.
-
-- **Organiser Navigation:** Dashboard | Events | Categories | Enrolments | Results | Profile | Logout
-- **Participant Navigation:** Home | Events | My Enrolments | My Results | Profile | Logout
-
-### 🏢 Organiser Interface
-- **Organiser Dashboard:** Overview of total events created, total participant enrolments, upcoming event dates, and enrolment summaries.
-- **Event Management:** Create, edit, delete, or deactivate events (Name, Description, Date, Location, Distance, Event Type, Banner Image).
-- **Category Management:** Manage age, distance, or event-specific categories.
-- **Enrolments:** View participants, selected categories, and update enrolment statuses.
-- **Results:** Capture, edit, or delete finish times and finishing positions after an event takes place.
-
-### 🏃 Participant Interface
-- **Home Page & Event Browsing:** Filter upcoming events by type, location, distance, and date.
-- **Event Details & Enrolment:** View complete event info and banners, choose categories, and submit enrolments.
-- **My Enrolments & Statuses:** Track entry states using status color coding:
-  - **Confirmed** → Green
-  - **Pending** → Amber
-  - **Rejected** → Red
-- **My Results:** View personal race history (Event name, Date, Category, Finish time, Position).
-- **Profile Management:** View/update personal info and upload profile pictures.
+- Provides role-specific navigation
+- Provides responsive layouts
+- Handles authenticated sessions
+- Displays validation messages
+- Handles API errors gracefully
 
 ---
 
-## ☁️ Azure Blob Storage
+## 🔐 Authentication and Session Management
 
-Azure Blob Storage is integrated into the Part 2 API for cloud-based image storage (event banner images and participant profile pictures).
+Authentication is performed by communicating with the Part 2 API.
 
-### File Upload Architecture
+Authenticated user information and roles are stored using **ASP.NET Core session management**.
+
+### Organiser Navigation
+
+```text
+Dashboard
+Events
+Categories
+Enrolments
+Results
+Profile
+Logout
+```
+
+### Participant Navigation
+
+```text
+Home
+Events
+My Enrolments
+My Results
+Profile
+Logout
+```
+
+---
+
+# 🏢 Organiser Interface
+
+### 📊 Organiser Dashboard
+
+The dashboard provides an overview of:
+
+- Total events created
+- Total participant enrolments
+- Upcoming event dates
+- Enrolment summaries
+
+### 🏁 Event Management
+
+Organisers can:
+
+- Create events
+- Edit events
+- Delete events
+- Deactivate events
+- Upload event banner images
+
+Event information includes:
+
+- Event Name
+- Description
+- Date
+- Location
+- Distance
+- Event Type
+- Banner Image
+
+### 🏷️ Category Management
+
+Organisers can:
+
+- Create categories
+- Edit categories
+- Delete categories
+- Deactivate categories
+
+### 👥 Enrolment Management
+
+Organisers can:
+
+- View participants
+- View selected categories
+- View enrolment information
+- Update enrolment statuses
+
+### 🏆 Results Management
+
+Organisers can:
+
+- Capture race results
+- Edit results
+- Delete results
+- Record finish times
+- Record finishing positions
+
+---
+
+# 🏃 Participant Interface
+
+## 🏠 Home Page and Event Browsing
+
+Participants can:
+
+- Browse upcoming events
+- Filter events by type
+- Filter events by location
+- Filter events by distance
+- Filter events by date
+- View event details
+
+## 📝 Event Enrolment
+
+Participants can:
+
+- View complete event information
+- View event banners
+- View available categories
+- Select a category
+- Submit an enrolment
+
+## 📋 My Enrolments
+
+Participants can track their enrolment status using colour-coded statuses:
+
+| Status | Meaning |
+|---|---|
+| 🟢 **Confirmed** | Enrolment has been approved |
+| 🟠 **Pending** | Enrolment is awaiting processing |
+| 🔴 **Rejected** | Enrolment has been rejected |
+
+## 🏆 My Results
+
+Participants can view their personal race history, including:
+
+- Event name
+- Event date
+- Category
+- Finish time
+- Finishing position
+
+## 👤 Profile Management
+
+Participants can:
+
+- View their personal information
+- Update their profile
+- Upload a profile picture
+
+---
+
+# ☁️ Azure Blob Storage
+
+Azure Blob Storage is integrated into the RaceDay API for cloud-based image storage.
+
+It is used for:
+
+- Event banner images
+- Participant profile pictures
+
+## 📤 File Upload Architecture
 
 ```text
 +---------------------+
@@ -166,27 +336,54 @@ Azure Blob Storage is integrated into the Part 2 API for cloud-based image stora
 +---------------------+
 | Azure Blob Storage  |
 +---------------------+
+```
 
-## 🐳 Docker Containerisation
-
-The RaceDay MVC application includes a multi-stage `Dockerfile` optimizing build and runtime environments.
-
-### Build and Run Docker Container
-Execute the following commands from the Part 3 MVC project directory:
-
-```bash
-# Build the Docker image
-docker build -t raceday-mvc .
-
-# Run the Docker container
-docker run -d -p 8080:8080 --name raceday-mvc raceday-mvc ## 📦 GitHub and Version Control
-
-- Maintained in the official RaceDay GitHub repository with a minimum of 20 meaningful commits for Part 3.
-- **GitHub Actions CI/CD:** Automated workflow verifying .NET SDK setup, solution restoration, project compilation, unit tests, and structural integrity.
+The MVC application sends upload requests to the API, and the API handles the communication with Azure Blob Storage.
 
 ---
 
-## 📁 Repository Structure
+# 🐳 Docker Containerisation
+
+The RaceDay MVC application includes a multi-stage `Dockerfile` to optimise the build and runtime environments.
+
+## Build the Docker Image
+
+Run the following command from the Part 3 MVC project directory:
+
+```bash
+docker build -t raceday-mvc .
+```
+
+## Run the Docker Container
+
+```bash
+docker run -d -p 8080:8080 --name raceday-mvc raceday-mvc
+```
+
+The application can then be accessed through the configured local Docker port.
+
+---
+
+# 📦 GitHub and Version Control
+
+The RaceDay project is maintained in a GitHub repository.
+
+Part 3 includes a minimum of **20 meaningful commits** documenting the development process.
+
+## GitHub Actions CI/CD
+
+Automated GitHub Actions workflows are used to verify:
+
+- .NET SDK setup
+- Solution restoration
+- Project compilation
+- Unit tests
+- Project structure
+- Build integrity
+
+---
+
+# 📁 Repository Structure
 
 ```text
 RaceDay/
@@ -212,14 +409,18 @@ RaceDay/
 │
 ├── RaceDay.sln
 └── README.md
-## 🛠️ Technologies Used
+```
+
+---
+
+# 🛠️ Technologies Used
 
 | Technology | Purpose |
-| :--- | :--- |
+|---|---|
 | **C#** | Application programming language |
 | **ASP.NET Core MVC** | Web frontend |
 | **ASP.NET Core Web API** | Backend REST API |
-| **Entity Framework Core** | Database access in the API |
+| **Entity Framework Core** | Database access |
 | **SQL Server** | Relational database |
 | **Bootstrap** | Responsive UI styling |
 | **Swagger / OpenAPI** | API documentation and testing |
@@ -229,12 +430,36 @@ RaceDay/
 
 ---
 
-## 🎥 Part 3 Demonstration Video
+# 🎥 Part 3 Demonstration Video
 
-- **YouTube Video Link:** `🔗 PASTE YOUR PART 3 UNLISTED YOUTUBE LINK HERE`
+**YouTube Video:**  
+`🔗 PASTE YOUR PART 3 UNLISTED YOUTUBE LINK HERE`
 
 ---
 
-## 🏁 Final Summary
+# 🏁 Final Summary
 
-RaceDay successfully combines database planning, a robust RESTful backend API, and a dynamic ASP.NET Core MVC frontend into a complete, containerized platform for managing sporting events.
+RaceDay successfully combines database planning, a RESTful backend API, and a dynamic ASP.NET Core MVC frontend into a complete web-based sporting event management system.
+
+The system provides separate functionality for **Organisers** and **Participants**, supports secure authentication and role-based access, manages sporting events and enrolments, records race results, stores images using Azure Blob Storage, and supports Docker containerisation.
+
+The project demonstrates the use of modern software development practices including:
+
+- RESTful API development
+- MVC architecture
+- Entity Framework Core
+- SQL Server database integration
+- Authentication and session management
+- Cloud storage
+- Unit testing
+- GitHub Actions CI/CD
+- Docker containerisation
+- Git version control
+
+---
+
+## 👨‍💻 Project
+
+**RaceDay – Event Management System**
+
+**Technology Stack:** C# | ASP.NET Core | SQL Server | Entity Framework Core | Azure | Docker | GitHub Actions
