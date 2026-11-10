@@ -1,264 +1,240 @@
-# RaceDay – Event Management System
+# 🏃 RaceDay – Event Management System
 
-## Project Overview
+## 📌 Project Overview
 
 RaceDay is a full-stack web-based event management system designed for the South African road running, walking, and cycling community.
 
-The system allows Event Organisers to create and manage sporting events, categories, participant enrolments and race results. Participants can create accounts, browse upcoming events, enter events, view their enrolments and track their personal race results.
+The system allows Event Organisers to create and manage sporting events, categories, participant enrolments, and race results. Participants can create accounts, browse upcoming events, enter events, view their enrolments, and track their personal race results.
 
-The project is being developed progressively across three parts:
-
+The project was developed progressively across three parts:
 - **Part 1:** System Planning and Database Design
 - **Part 2:** RESTful API Development and Testing
-- **Part 3:** MVC Web Application, Azure Blob Storage and Docker Containerisation
+- **Part 3:** MVC Web Application, Azure Blob Storage, and Docker Containerisation
 
 ---
 
-# User Roles
+## 👥 User Roles
 
-## Organiser
-
+### 🏢 Organiser
 Organisers are responsible for managing sporting events on the RaceDay platform.
 
-Organisers can:
+**Organisers can:**
+- Log into the RaceDay system
+- View an organiser dashboard
+- Create, edit, and delete or deactivate events
+- Upload event banner images
+- Create, edit, and delete or deactivate event categories
+- View participant enrolments and manage enrolment statuses
+- Capture, edit, and delete participant results
 
-- Create events
-- Edit events
-- Delete or deactivate events
-- Create event categories
-- Edit categories
-- Delete or deactivate categories
-- View participant enrolments
-- Manage enrolment status
-- Capture participant results
-- Edit results
-- Delete incorrect results
-
-## Participant
-
+### 🏃 Participant
 Participants use RaceDay to register and participate in events.
 
-Participants can:
-
-- Create an account
-- Log into the system
-- Manage their profile
-- Browse upcoming events
-- View event details
-- View event categories
-- Enrol in events
-- Select an event category
-- View their own enrolments
-- View their personal race results
+**Participants can:**
+- Create an account, log in, and manage their profile
+- Upload a profile picture
+- Browse upcoming events, apply filters, and view event details and available categories2
+- Enrol in events and select a category
+- View their enrolments and enrolment statuses
+- View their personal race results and complete race history
 
 ---
 
-# Part 1 – System Planning and Database
+## 📚 Part 1 – System Planning and Database
 
-Part 1 focuses on planning the RaceDay system before API development begins.
+Part 1 focused on planning the RaceDay system before API development began.
 
-The following documents have been produced:
-
+**The following documents were produced:**
 1. Entity Relationship Diagram (ERD)
 2. API Endpoint Plan
 3. SQL Server Database Script
 
----
-
-## Database Entities
-
-The RaceDay database contains the following entities:
-
-1. Users
-2. Organisers
-3. Events
-4. Categories
-5. Enrolments
-6. Results
-
-The database relationships allow:
-
-- Organisers to manage events
-- Events to contain categories
-- Participants to enrol in events
-- Enrolments to have race results
+### Database Entities
+The RaceDay database contains the following main entities:
+1. `Users`
+2. `Organisers`
+3. `Events`
+4. `Categories`
+5. `Enrolments`
+6. `Results`
 
 ---
 
-## Entity Relationship Diagram
+## 🔌 Part 2 – RESTful API Development and Testing
 
-The Entity Relationship Diagram shows the structure of the RaceDay database and the relationships between the entities.
+Part 2 implemented the backend RESTful Web API using **ASP.NET Core Web API (C#)** and **Entity Framework Core** with a **SQL Server** database, following the endpoint plan created during Part 1.
 
-![RaceDay ERD](docs/RaceDay_ERD.png.jpeg)
-
----
-
-# Part 2 – RESTful API Development and Testing
-
-Part 2 implements the backend RESTful Web API using **ASP.NET Core Web API (C#)** and **Entity Framework Core (Code-First Approach)** connected to a SQL Server database, following the endpoint plan produced in Part 1.
-
-## Part 2 Learning Outcomes & Requirements
-- Built a RESTful Web API using ASP.NET Core Web API in C# with Entity Framework Core Code-First approach matching the Part 1 ERD and SQL schema.
-- Implemented user registration, login, and session-based authentication supporting Organiser and Participant roles with password hashing.
-- Fully implemented all planned endpoints for Authentication, User Profile, Events, Categories, Event Enrolments, and Results.
-- Integrated **Swagger / OpenAPI** for interactive endpoint testing directly through the browser.
-- Developed comprehensive **Unit Tests** covering expected success and failure scenarios for authentication, event management, role rejection, and event enrolments.
-- Configured automated **GitHub Actions CI/CD workflow** to build the solution and run all unit tests on every push.
-
----
-
-# Project Documentation
-
-The `/docs` folder contains the following project documentation:
-
-| File | Description |
-|---|---|
-| `RaceDay_ERD.png` | Entity Relationship Diagram |
-| `RaceDay_API_Endpoint_Plan.md` | RESTful API endpoint planning document |
-| `RaceDay_Database.sql` | SQL Server database creation and sample data script |
-| `ci-green-build.png` | Successful GitHub Actions CI/CD build screenshot |
-
----
-
-# Database Setup
-
-The RaceDay database was designed for Microsoft SQL Server and can be executed using SQL Server Management Studio (SSMS) or automatically generated via Entity Framework Core Code-First migrations in Part 2.
-
-## Steps
-
-1. Open **SQL Server Management Studio (SSMS)** or configure your `appsettings.json` connection string.
-2. Create a new query.
-3. Open `docs/RaceDay_Database.sql`.
-4. Copy the complete SQL script into the query window if necessary.
-5. Execute the complete script.
-6. The script creates the `RaceDay` database.
-7. The script creates all required tables and constraints.
-8. Sample users, organisers, events, categories, enrolments and results are inserted.
-9. Verification queries are included at the end of the script.
-
----
-
-## Expected Seed Data
-
-| Entity | Records |
-|---|---:|
-| Users | 4 |
-| Organisers | 2 |
-| Events | 3 |
-| Categories | 7 |
-| Enrolments | 4 |
-| Results | 2 |
-
----
-
-# API Planning & Implementation
-
-The API Endpoint Plan defines the RESTful API that was successfully implemented in Part 2.
-
-The implemented API covers:
-
-- Authentication (Register & Login with password hashing)
-- User profiles (View & Update)
-- Events (Create, Read, Update, Delete/Deactivate)
-- Categories (Create, Read, Update, Delete/Deactivate)
-- Event Enrolments (Participant entry & Organiser management)
-- Results (Capture, View, Update, Delete)
+### Part 2 Features
+- User registration, login, password hashing, and role-based authentication
+- User profile management
+- Event and category management
+- Participant enrolments and status management
+- Race result management
+- Swagger / OpenAPI documentation
+- Unit testing and GitHub Actions CI/CD workflows
 
 Role-based access is strictly enforced at the API level for Organisers and Participants.
 
-The complete endpoint plan can be found in:
+---
 
-`docs/RaceDay_API_Endpoint_Plan.md`
+## 🌐 Part 3 – Automation of Web Application
+
+Part 3 brings the RaceDay system together by adding the web-based frontend developed using **ASP.NET Core MVC**. It communicates entirely with the Part 2 RESTful API for all application data operations.
+
+### System Architecture
+
+```text
+                         USER
+                           |
+                           v
+              +-------------------------+
+              |   ASP.NET Core MVC      |
+              |    Web Application      |
+              +-----------+-------------+
+                          |
+                          | HTTP / REST
+                          v
+              +-------------------------+
+              |      RaceDay API        |
+              |   ASP.NET Core Web API  |
+              +-----------+-------------+
+                          |
+                  +-------+-------+
+                  |               |
+                  v               v
+          +-------------+   +-------------------+
+          | SQL Server  |   | Azure Blob        |
+          |  Database   |   | Storage           |
+          +-------------+   +-------------------+
+
+## System Architecture
+
+- **MVC Application Responsibilities:** User interface, session management, role-based navigation, presentation of data, and communication with the API.
+- **API Responsibilities:** Business operations, authentication, data access, database operations, file uploads, and Azure Blob Storage integration.
 
 ---
 
-# GitHub Actions / CI/CD & Unit Testing
+## 🚀 Part 3 Features
 
-GitHub Actions is used to automatically validate the repository structure, build the solution, and execute all unit tests for Part 2.
+### 🖥️ MVC Web Application
+- Consumes the Part 2 RESTful API using controllers and views
+- Provides role-specific navigation, responsive layouts, and authenticated sessions
+- Displays validation messages and handles API errors gracefully
 
-The workflows check that:
-- The `/docs` folder, ERD, API endpoint plan, SQL database script, and README file exist.
-- The solution successfully builds using the .NET SDK.
-- All unit tests pass successfully.
+### 🔐 Authentication and Session Management
+Authentication is performed by communicating with the Part 2 API, storing authenticated user information and roles via ASP.NET Core session management.
 
-## Successful CI/CD Build
+- **Organiser Navigation:** Dashboard | Events | Categories | Enrolments | Results | Profile | Logout
+- **Participant Navigation:** Home | Events | My Enrolments | My Results | Profile | Logout
 
-The successful GitHub Actions build screenshot is shown below.
+### 🏢 Organiser Interface
+- **Organiser Dashboard:** Overview of total events created, total participant enrolments, upcoming event dates, and enrolment summaries.
+- **Event Management:** Create, edit, delete, or deactivate events (Name, Description, Date, Location, Distance, Event Type, Banner Image).
+- **Category Management:** Manage age, distance, or event-specific categories.
+- **Enrolments:** View participants, selected categories, and update enrolment statuses.
+- **Results:** Capture, edit, or delete finish times and finishing positions after an event takes place.
 
-![Successful CI/CD Build](docs/ci-green-build.png.png)
-
----
-
-# Video Presentation
-
-An unlisted YouTube video demonstrating Part 1 and Part 2 is provided below.
-
-The video demonstrates:
-- RaceDay system overview
-- ERD and database relationships
-- API endpoint plan and implementation
-- SQL database script and Entity Framework setup
-- Running the API and testing endpoints via Swagger UI
-- Unit tests execution and role-based access verification
-
-## YouTube Video
-
-**Video Link:**  
-https://youtu.be/wKNmxjomE90?si=r-a8bmEUBTud_WTi
+### 🏃 Participant Interface
+- **Home Page & Event Browsing:** Filter upcoming events by type, location, distance, and date.
+- **Event Details & Enrolment:** View complete event info and banners, choose categories, and submit enrolments.
+- **My Enrolments & Statuses:** Track entry states using status color coding:
+  - **Confirmed** → Green
+  - **Pending** → Amber
+  - **Rejected** → Red
+- **My Results:** View personal race history (Event name, Date, Category, Finish time, Position).
+- **Profile Management:** View/update personal info and upload profile pictures.
 
 ---
 
-# Repository Structure
+## ☁️ Azure Blob Storage
+
+Azure Blob Storage is integrated into the Part 2 API for cloud-based image storage (event banner images and participant profile pictures).
+
+### File Upload Architecture
+
+```text
++---------------------+
+|   MVC Application   |
++----------+----------+
+           |
+           v
++---------------------+
+|    RaceDay API      |
++----------+----------+
+           |
+           v
++---------------------+
+| Azure Blob Storage  |
++---------------------+
+
+## 🐳 Docker Containerisation
+
+The RaceDay MVC application includes a multi-stage `Dockerfile` optimizing build and runtime environments.
+
+### Build and Run Docker Container
+Execute the following commands from the Part 3 MVC project directory:
+
+```bash
+# Build the Docker image
+docker build -t raceday-mvc .
+
+# Run the Docker container
+docker run -d -p 8080:8080 --name raceday-mvc raceday-mvc ## 📦 GitHub and Version Control
+
+- Maintained in the official RaceDay GitHub repository with a minimum of 20 meaningful commits for Part 3.
+- **GitHub Actions CI/CD:** Automated workflow verifying .NET SDK setup, solution restoration, project compilation, unit tests, and structural integrity.
+
+---
+
+## 📁 Repository Structure
 
 ```text
 RaceDay/
+│
 ├── .github/
 │   └── workflows/
 │       ├── part1-ci.yml
-│       └── part2-ci.yml
+│       ├── part2-ci.yml
+│       └── part3-ci.yml
 │
 ├── docs/
+│   ├── RaceDay_ERD.png
 │   ├── RaceDay_API_Endpoint_Plan.md
 │   ├── RaceDay_Database.sql
-│   ├── RaceDay_ERD.png.jpeg
-│   └── ci-green-build.png.png
+│   ├── ci-green-build.png
+│   └── part3-screenshots/
 │
 ├── src/
 │   ├── RaceDay.Api/
-│   │   ├── Controllers/
-│   │   │   ├── AuthController.cs
-│   │   │   ├── CategoriesController.cs
-│   │   │   ├── EnrolmentsController.cs
-│   │   │   ├── EventsController.cs
-│   │   │   ├── ResultsController.cs
-│   │   │   └── UsersController.cs
-│   │   ├── Dtos/
-│   │   │   ├── AuthDtos.cs
-│   │   │   ├── EventDtos.cs
-│   │   │   └── ResultDtos.cs
-│   │   ├── appsettings.json
-│   │   ├── appsettings.Development.json
-│   │   ├── Program.cs
-│   │   └── RaceDay.Api.csproj
-│   │
 │   ├── RaceDay.Core/
-│   │   ├── Data/
-│   │   │   └── RaceDayDbContext.cs
-│   │   ├── Entities/
-│   │   │   ├── Category.cs
-│   │   │   ├── Enrolment.cs
-│   │   │   ├── Event.cs
-│   │   │   ├── Organiser.cs
-│   │   │   ├── Result.cs
-│   │   │   └── User.cs
-│   │   └── RaceDay.Core.csproj
-│   │
-│   └── RaceDay.Tests/
-│       ├── Controllers/
-│       │   ├── AuthControllerTests.cs
-│       │   ├── EventsControllerTests.cs
-│       │   └── EnrolmentsControllerTests.cs
-│       └── RaceDay.Tests.csproj
+│   ├── RaceDay.Tests/
+│   └── RaceDay.Web/
 │
 ├── RaceDay.sln
 └── README.md
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+| :--- | :--- |
+| **C#** | Application programming language |
+| **ASP.NET Core MVC** | Web frontend |
+| **ASP.NET Core Web API** | Backend REST API |
+| **Entity Framework Core** | Database access in the API |
+| **SQL Server** | Relational database |
+| **Bootstrap** | Responsive UI styling |
+| **Swagger / OpenAPI** | API documentation and testing |
+| **Azure Blob Storage** | Cloud image storage |
+| **Docker** | Application containerisation |
+| **GitHub Actions** | CI/CD automation |
+
+---
+
+## 🎥 Part 3 Demonstration Video
+
+- **YouTube Video Link:** `🔗 PASTE YOUR PART 3 UNLISTED YOUTUBE LINK HERE`
+
+---
+
+## 🏁 Final Summary
+
+RaceDay successfully combines database planning, a robust RESTful backend API, and a dynamic ASP.NET Core MVC frontend into a complete, containerized platform for managing sporting events.
